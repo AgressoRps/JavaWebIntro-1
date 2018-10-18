@@ -4,6 +4,7 @@ import lombok.Data;
 import org.communis.javawebintro.enums.AircraftStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,7 +15,11 @@ public class Aircraft {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "palaces")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_name")
+    private AircraftName aircraftName;
+
+    @Column(name = "places")
     private Integer countPlaces;
 
     @Enumerated(EnumType.STRING)
@@ -29,7 +34,7 @@ public class Aircraft {
     @JoinColumn(name = "id_company")
     private Company company;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pilot ")
     private Pilot pilot;
 
@@ -39,6 +44,14 @@ public class Aircraft {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public AircraftName getAircraftName() {
+        return aircraftName;
+    }
+
+    public void setAircraftName(AircraftName aircraftName) {
+        this.aircraftName = aircraftName;
     }
 
     public Integer getCountPlaces() {

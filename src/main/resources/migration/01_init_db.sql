@@ -84,7 +84,7 @@ CREATE TABLE pilot                                          --// сущност�
   surname         CHARACTER VARYING NOT NULL,               --// фамилия
   second_name     CHARACTER VARYING NOT NULL,               --// отчество
   mail            CHARACTER VARYING NOT NULL,               --// почта
-  status          BOOLEAN DEFAULT FALSE NOT NULL,           --// флаг, в отпуске либо нет
+  status          CHARACTER VARYING NOT NULL,           --// флаг, в полете либо нет
   PRIMARY KEY(id)
 );
 
@@ -100,18 +100,19 @@ CREATE TABLE name_aircraft                                  --// сущност�
   id              BIGINT AUTO_INCREMENT NOT NULL,           --// уникальный идентификатор
   name            CHARACTER VARYING NOT NULL,               --// наименование модели
   PRIMARY KEY(id)
-)
+);
 
 CREATE TABLE aircraft                                       --// сущность для хранения самолетов
 (
   id                BIGINT AUTO_INCREMENT NOT NULL,         --// уникальный идентификатор
   id_name           BIGINT NOT NULL,             --// модель самолета
   places            INTEGER NOT NULL,                       --// количество мест в самолете
-  condition_air     BOOLEAN DEFAULT FALSE NOT NULL,         --// флаг, на ремонте либо нет
+  condition_air     CHARACTER VARYING NOT NULL,         --// флаг, на ремонте либо нет
   id_type           BIGINT NOT NULL,                        --// ссылка на сущность с информацией о типах самолетов
   id_company        BIGINT NOT NULL,                        --// ссылка на сущность с информацией о компаниях
   id_pilot          BIGINT NOT NULL,                        --// ссылка на сущность с информацией о пилотах
   PRIMARY KEY(id),
+  FOREIGN KEY (id_name) REFERENCES name_aircraft(id),
   FOREIGN KEY (id_type) REFERENCES type_aircraft(id),
   FOREIGN KEY (id_company) REFERENCES company (id),
   FOREIGN KEY (id_pilot) REFERENCES pilot (id)

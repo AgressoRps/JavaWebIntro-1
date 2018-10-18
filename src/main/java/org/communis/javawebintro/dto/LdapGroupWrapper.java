@@ -32,4 +32,6 @@ public class LdapGroupWrapper {
     public void setGroups(List<String> groups) {
         this.groups = groups;
     }
+
+
 }

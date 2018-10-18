@@ -2,8 +2,7 @@ package org.communis.javawebintro.enums;
 
 public enum PilotStatus {
     AVAILABLE,
-    FLIGHT,
-    HOLIDAY;
+    FLIGHT;
 
 
     public String getStringName() {
@@ -12,8 +11,6 @@ public enum PilotStatus {
                 return "Доступен";
             case FLIGHT:
                 return "В рейсе";
-            case HOLIDAY:
-                return "В отпуске";
             default:
                 return null;
         }
