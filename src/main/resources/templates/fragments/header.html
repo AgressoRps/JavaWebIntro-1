@@ -39,6 +39,10 @@
                 th:class="${item == 'users'} ? active : ''"><a th:href="@{/admin/users}">Пользователи</a></li>
             <li sec:authorize="hasRole('ROLE_ADMIN')"
                 th:class="${item == 'ldap'} ? active : ''"><a th:href="@{/admin/ldap}">LDAP</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"
+                th:class="${item == 'pilots'} ? active : ''"><a th:href="@{/admin/pilots}">Пилоты</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"
+                th:class="${item == 'aircraft'} ? active : ''"><a th:href="@{/admin/aircraft}">Самолеты</a></li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <div class="divider"></div>
             </li>
@@ -65,6 +69,16 @@
                     <a th:class="${item == 'ldap'} ? 'active' : ''" target="_self"
                             th:href="@{/admin/ldap}">
                         LDAP</a>
+                </li>
+                <li class="tab" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:class="${item == 'pilots'} ? 'active' : ''" target="_self"
+                       th:href="@{/admin/pilots}">
+                        Пилоты</a>
+                </li>
+                <li class="tab" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:class="${item == 'aircraft'} ? 'active' : ''" target="_self"
+                       th:href="@{/admin/aircraft}">
+                        Самолеты</a>
                 </li>
             </ul>
         </div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head(~{::title},~{::link}, ~{::script})">
+    <title>Изменение LDAP-сервера</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/form.css}"/>
+
+    <script th:src="@{/static/js/admin/ldap/service.js}"></script>
+    <script th:src="@{/static/js/admin/ldap/controller.js}"></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header(ldap, admin)"></header>
+
+<div class="form-body big-form">
+    <nav class="breadcrumb-nav">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a th:href="@{/admin/ldap}" class="breadcrumb">Реестр ldap-cерверов</a>
+                <a th:href="@{'/admin/ldap/' + ${ldap.id}}" th:text="'№' + ${ldap.id}" class="breadcrumb"></a>
+            </div>
+        </div>
+    </nav>
+    <form id="ldap-form" name="ldap-form" class="form-horizontal" th:method="PATCH" th:action="@{/admin/ldap}">
+        <div th:replace="fragments/card/ldap :: ldapFields"></div>
+        <div class="buttons-area">
+            <button onclick="LdapController.deactivate()"
+                    th:if="${ldap.active == true}"
+                    type="button" class="waves-effect waves-light btn red">Отключить
+            </button>
+            <button onclick="LdapController.activate()"
+                    th:if="${ldap.active != true}"
+                    type="button" class="waves-effect waves-light btn green">Активировать
+            </button>
+            <button onclick="LdapController.deleteLdap()"
+                    type="button" class="waves-effect waves-light btn">Удалить</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

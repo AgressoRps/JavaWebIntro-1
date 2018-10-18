@@ -37,7 +37,7 @@ public class PilotService {
             Pilot pilot = new Pilot();
             pilotWrapper.fromWrapper(pilot);
             if (pilotRepository.findFirstByMail(pilotWrapper.getMail()).isPresent()) {
-                throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LOGIN_ALREADY_EXIST));
+                throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_MAIL_ALREADY_EXIST));
             }
             pilot.setStatus(PilotStatus.AVAILABLE);
 
@@ -45,7 +45,7 @@ public class PilotService {
         } catch (ServerException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_ADD_ERROR), ex);
         }
     }
 
@@ -63,7 +63,7 @@ public class PilotService {
         } catch (ServerException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_UPDATE_ERROR), ex);
         }
     }
 
@@ -89,7 +89,7 @@ public class PilotService {
         }catch (ServerException ex){
             throw ex;
         }catch (Exception ex){
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_DELETE_ERROR));
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_DELETE_ERROR));
         }
     }
 
@@ -108,7 +108,7 @@ public class PilotService {
         } catch (ServerException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_BLOCK_ERROR), ex);
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_DEACTIVATE_ERROR), ex);
         }
     }
 
@@ -126,7 +126,7 @@ public class PilotService {
         } catch (ServerException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UNBLOCK_ERROR), ex);
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_ACTIVATE_ERROR), ex);
         }
     }
 
@@ -142,7 +142,7 @@ public class PilotService {
         } catch (ServerException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_INFO_ERROR), ex);
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_INFO_ERROR), ex);
         }
     }
 
@@ -158,7 +158,7 @@ public class PilotService {
             return pilotRepository.findAll(PilotSpecification.build(pilotFilterWrapper), pageable)
                     .map(PilotWrapper::new);
         } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.PILOT_LIST_ERROR), ex);
         }
     }
 

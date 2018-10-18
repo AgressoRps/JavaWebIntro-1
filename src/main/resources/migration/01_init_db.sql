@@ -84,9 +84,12 @@ CREATE TABLE pilot                                          --// сущност�
   surname         CHARACTER VARYING NOT NULL,               --// фамилия
   second_name     CHARACTER VARYING NOT NULL,               --// отчество
   mail            CHARACTER VARYING NOT NULL,               --// почта
-  status          CHARACTER VARYING NOT NULL,           --// флаг, в полете либо нет
+  status          CHARACTER VARYING NOT NULL,               --// флаг, в полете либо нет
   PRIMARY KEY(id)
 );
+
+INSERT INTO pilot (name, surname, second_name, mail, status)
+VALUES('Владислав','Старокожев', 'Сергеевич', 'AgressoRj@gmail.com', 'AVAILABLE');
 
 CREATE TABLE type_aircraft                                  --// сущность для хранения типов самолетов
 (
@@ -105,9 +108,9 @@ CREATE TABLE name_aircraft                                  --// сущност�
 CREATE TABLE aircraft                                       --// сущность для хранения самолетов
 (
   id                BIGINT AUTO_INCREMENT NOT NULL,         --// уникальный идентификатор
-  id_name           BIGINT NOT NULL,             --// модель самолета
+  id_name           BIGINT NOT NULL,                        --// модель самолета
   places            INTEGER NOT NULL,                       --// количество мест в самолете
-  condition_air     CHARACTER VARYING NOT NULL,         --// флаг, на ремонте либо нет
+  condition_air     CHARACTER VARYING NOT NULL,             --// флаг, на ремонте либо нет
   id_type           BIGINT NOT NULL,                        --// ссылка на сущность с информацией о типах самолетов
   id_company        BIGINT NOT NULL,                        --// ссылка на сущность с информацией о компаниях
   id_pilot          BIGINT NOT NULL,                        --// ссылка на сущность с информацией о пилотах

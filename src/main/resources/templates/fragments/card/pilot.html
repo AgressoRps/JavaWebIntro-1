@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns="http://www.w3.org/1999/xhtml">
+<div th:fragment="pilotFields(action)">
+    <div class="form-body big-form">
+        <div class="col s12">
+            <nav class="breadcrumb-nav" th:if="${action == 'admin/pilots/'}">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a th:href="@{/admin/pilots}" class="breadcrumb">Реестр пилотов</a>
+                        <a th:href="@{'/admin/pilots/' + ${pilot.id}}" th:text="'№' + ${pilot.id}" class="breadcrumb"></a>
+                    </div>
+                </div>
+            </nav>
+            <nav class="breadcrumb-nav" th:if="${action == 'my/'}">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a th:href="@{/}" class="breadcrumb">Главная</a>
+                        <a th:href="@{/my}" class="breadcrumb">Персональные данные</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="row row-eq-height">
+            <form id="user-form" class="form-horizontal col s7" style="padding-left: 0" th:method="PATCH"
+                  th:action="@{/admin/pilots/}">
+                <input type="hidden" name="id" th:field="${pilot.id}"/>
+                <fieldset>
+                    <legend>Личная информация</legend>
+                    <div class="col s6">
+                        <div class="input-field">
+                            <input id="surname" name="surname" class="required validate"
+                                   maxlength="100" type="text"
+                                   th:field="${pilot.surname}"/>
+                            <label for="surname">Фамилия</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="name" name="name" type="text"
+                                   class="required validate" maxlength="100"
+                                   th:field="${pilot.name}"/>
+                            <label for="name">Имя</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="second-name" name="secondName" type="text"
+                                   maxlength="100"
+                                   th:field="${pilot.secondName}"/>
+                            <label for="second-name">Отчество</label>
+                        </div>
+                    </div>
+                    <div class="col s6">
+                        <div class="input-field">
+                            <input id="email" name="email" class="required validate email" maxlength="256"
+                                   type="email"
+                                   th:field="${pilot.mail}"/>
+                            <label for="email">Электронная почта</label>
+                        </div>
+                        <div class="input-field" th:hidden="${action == 'my/'}"
+                             sec:authorize="hasRole('ROLE_ADMIN')">
+                            <input name="status" th:field="${pilot.status}" hidden/>
+                            <input id="status-user" th:value="${pilot.status.getStringName()}" readonly type="text"/>
+                            <label for="status-user">Статус</label>
+                        </div>
+                    </div>
+                    <div class="buttons-area col s12">
+                        <button onclick="PilotController.flightPilot()"
+                                th:if="${action == 'admin/pilots/' && pilot.status != T(org.communis.javawebintro.enums.PilotStatus).FLIGHT}"
+                                type="button" class="waves-effect waves-light btn">Заблокировать
+                        </button>
+                        <button onclick="PilotController.availablePilot()"
+                                th:if="${action == 'admin/pilots/' && pilot.status == T(org.communis.javawebintro.enums.PilotStatus).FLIGHT}"
+                                type="button" class="waves-effect waves-light btn">Разблокировать
+                        </button>
+                        <button onclick="PilotController.deletePilot()"
+                                type="button" class="waves-effect waves-light btn">Удалить
+                        </button>
+                    </div>
+                    <div class="button-area col s12" style="text-align: center; padding-top: 15px;">
+                        <button type="submit" class="waves-effect waves-light btn">Cохранить</button>
+                    </div>
+                    <div class="col s12" id="data-success">
+                        <div th:replace="fragments/info :: successFragment"></div>
+                    </div>
+                    <div th:replace="fragments/error :: errorModalFragment"></div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+</html>

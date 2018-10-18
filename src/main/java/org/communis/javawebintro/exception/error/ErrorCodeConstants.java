@@ -59,6 +59,18 @@ public class ErrorCodeConstants {
     public static final ErrorCodeIdentifier AIRCRAFT_DEACTIVATE_ERROR = AIRCRAFT.branch("7");
     public static final ErrorCodeIdentifier AIRCRAFT_DELETE_ERROR = AIRCRAFT.branch("9");
 
+    public static final ErrorCodeIdentifier PILOT = new ErrorCodeIdentifier("4");
+    public static final ErrorCodeIdentifier PILOT_LIST_ERROR = PILOT.branch("1");
+    public static final ErrorCodeIdentifier PILOT_INFO_ERROR = PILOT.branch("2");
+    public static final ErrorCodeIdentifier PILOT_ADD_ERROR = PILOT.branch("3");
+    public static final ErrorCodeIdentifier PILOT_UPDATE_ERROR = PILOT.branch("4");
+
+    public static final ErrorCodeIdentifier PILOT_GROUPS_ERROR = PILOT.branch("5");
+    public static final ErrorCodeIdentifier PILOT_ACTIVATE_ERROR = PILOT.branch("6");
+    public static final ErrorCodeIdentifier PILOT_DEACTIVATE_ERROR = PILOT.branch("7");
+    public static final ErrorCodeIdentifier PILOT_DELETE_ERROR = PILOT.branch("9");
+    public static final ErrorCodeIdentifier PILOT_MAIL_ALREADY_EXIST = USER_ADD_ERROR.branch("10");
+
     static {
         messages.put(DATA_NOT_FOUND, "Ошибка при получении реестра ldap-серверов");
         messages.put(ACCESS_ERROR, "Доступ запрещен");
@@ -102,7 +114,16 @@ public class ErrorCodeConstants {
         messages.put(AIRCRAFT_ADD_ERROR, "Ошибка при добавлении информации о самолете");
         messages.put(AIRCRAFT_UPDATE_ERROR, "Ошибка при изменении информации о самолете");
 
-        messages.put(AIRCRAFT_ACTIVATE_ERROR, "Ошибка при изменении состояния самолета на 'доступный'");
-        messages.put(AIRCRAFT_DEACTIVATE_ERROR, "Ошибка при при изменении состояния самолета на 'в полете'");
+        messages.put(AIRCRAFT_ACTIVATE_ERROR, "Ошибка при изменении состояния самолета на 'доступен'");
+        messages.put(AIRCRAFT_DEACTIVATE_ERROR, "Ошибка при при изменении состояния самолета на 'на ремонте'");
+
+        messages.put(PILOT_LIST_ERROR, "Ошибка при получении реестра пилотов");
+        messages.put(PILOT_INFO_ERROR, "Ошибка при получении информации о пилоте");
+        messages.put(PILOT_ADD_ERROR, "Ошибка при добавлении информации о пилоте");
+        messages.put(PILOT_UPDATE_ERROR, "Ошибка при изменении информации о пилоте");
+
+        messages.put(PILOT_MAIL_ALREADY_EXIST, "Указанная почта уже используется");
+        messages.put(PILOT_ACTIVATE_ERROR, "Ошибка при изменении состояния пилота на 'доступен'");
+        messages.put(PILOT_DEACTIVATE_ERROR, "Ошибка при при изменении состояния самолета на 'в рейсе'");
     }
 }

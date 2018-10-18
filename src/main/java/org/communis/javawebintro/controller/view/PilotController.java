@@ -30,11 +30,11 @@ public class PilotController {
 
     @RequestMapping(value = "")
     public ModelAndView list(Pageable pageable, PilotFilterWrapper pilotFilterWrapper) throws ServerException {
-        ModelAndView resultUsersPage = new ModelAndView(USER_VIEWS_PATH + "list");
-        resultUsersPage.addObject("filter", pilotFilterWrapper);
-        resultUsersPage.addObject("page", pilotService.getPageByFilter(pageable, pilotFilterWrapper));
-        preparePilotModelAndView(resultUsersPage);
-        return resultUsersPage;
+        ModelAndView pilotPage = new ModelAndView(USER_VIEWS_PATH + "list");
+        pilotPage.addObject("filter", pilotFilterWrapper);
+        pilotPage.addObject("page", pilotService.getPageByFilter(pageable, pilotFilterWrapper));
+        preparePilotModelAndView(pilotPage);
+        return pilotPage;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -47,7 +47,7 @@ public class PilotController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable("id") Long id) throws ServerException {
         ModelAndView editPage = new ModelAndView(USER_VIEWS_PATH + "edit");
-        editPage.addObject("user", pilotService.getById(id));
+        editPage.addObject("pilot", pilotService.getById(id));
         preparePilotModelAndView(editPage);
         return editPage;
     }

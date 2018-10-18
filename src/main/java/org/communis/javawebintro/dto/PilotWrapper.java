@@ -56,6 +56,7 @@ public class PilotWrapper implements ObjectWrapper<Pilot>, Serializable {
     public void fromWrapper(Pilot item) {
         if(item!=null)
         {
+            item.setId(id);
             item.setName(name);
             item.setSurname(surname);
             item.setSecondName(secondName);
