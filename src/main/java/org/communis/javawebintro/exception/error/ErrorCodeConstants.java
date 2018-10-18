@@ -31,6 +31,7 @@ public class ErrorCodeConstants {
 
     public static final ErrorCodeIdentifier USER_ADD_ERROR = USER.branch("3");
     public static final ErrorCodeIdentifier USER_LOGIN_ALREADY_EXIST = USER_ADD_ERROR.branch("1");
+    public static final ErrorCodeIdentifier USER_MAIL_ALREADY_EXIST = USER_ADD_ERROR.branch("1");
 
     public static final ErrorCodeIdentifier USER_PASSWORD_ERROR = USER.branch("4");
     public static final ErrorCodeIdentifier USER_PASSWORD_LENGTH_ERROR = USER_PASSWORD_ERROR.branch("2");
@@ -69,6 +70,7 @@ public class ErrorCodeConstants {
 
         messages.put(USER_ADD_ERROR, "Ошибка при добавлении пользователя");
         messages.put(USER_LOGIN_ALREADY_EXIST, "Логин занят другим пользователем");
+        messages.put(USER_MAIL_ALREADY_EXIST, "Указанная почта уже используется");
 
         messages.put(USER_PASSWORD_ERROR, "Ошибка при изменении пароля пользователя");
         messages.put(USER_PASSWORD_LENGTH_ERROR, "Некорректная длина пароля");

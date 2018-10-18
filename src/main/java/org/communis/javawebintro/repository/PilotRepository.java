@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface PilotRepository extends JpaRepository<Pilot, Long>, JpaSpecificationExecutor<Pilot> {
 
+    Optional<Pilot> findFirstByMail(String mail);
     Optional<Pilot> findById(Long id);
 }
