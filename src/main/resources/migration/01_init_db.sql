@@ -62,11 +62,50 @@ VALUES('operator','Оператор', 'Оператор', CURRENT_TIMESTAMP,
        '$2a$10$LijUmixpYL0i9rRvwXrnX.heUijboQzE3PsoCrxuJANIDVX28FNjS',
        'operator@email', 'ACTIVE', 'ROLE_OPERATOR');
 
-CREATE TABLE permissions                            --// сущность для связи разрешений с ролями пользователей
+CREATE TABLE permissions                                 --// сущность для связи разрешений с ролями пользователей
 (
-  id     BIGINT AUTO_INCREMENT NOT NULL,            --// уникальный идентификатор
-  action CHARACTER VARYING NOT NULL,                --// наименование разрешения
-  role   CHARACTER VARYING NOT NULL,                --// роль
+  id          BIGINT AUTO_INCREMENT NOT NULL,            --// уникальный идентификатор
+  action      CHARACTER VARYING NOT NULL,                --// наименование разрешения
+  role        CHARACTER VARYING NOT NULL,                --// роль
   PRIMARY KEY (id)
+);
+
+CREATE TABLE company                                      --// сущность для хранения списка компаний
+(
+  id          BIGINT AUTO_INCREMENT NOT NULL,             --// уникальный идентификатор
+  name        CHARACTER VARYING NOT NULL,                 --// наименование компании
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE pilot                                          --// сущность для хранения пилотов
+(
+  id              BIGINT AUTO_INCREMENT NOT NULL,           --// уникальный идентификатор
+  name            CHARACTER VARYING NOT NULL,               --// имя
+  surname         CHARACTER VARYING NOT NULL,               --// фамилия
+  second_name     CHARACTER VARYING NOT NULL,               --// отчество
+  mail            CHARACTER VARYING NOT NULL,               --// почта
+  status          BOOLEAN DEFAULT FALSE NOT NULL,           --// флаг, в отпуске либо нет
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE type_aircraft                                  --// сущность для хранения типов самолетов
+(
+  id              BIGINT AUTO_INCREMENT NOT NULL,           --// уникальный идентификатор
+  name            CHARACTER VARYING NOT NULL,               --// наименование типа
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE aircraft                                       --// сущность для хранения самолетов
+(
+  id                BIGINT AUTO_INCREMENT NOT NULL,         --// уникальный идентификатор
+  places            SMALLINT NOT NULL,               --// количество мест в самолете
+  condition_air     BOOLEAN DEFAULT FALSE NOT NULL,         --// флаг, на ремонте либо нет
+  id_type           BIGINT NOT NULL,                        --// ссылка на сущность с информацией о типах самолетов
+  id_company        BIGINT NOT NULL,                        --// ссылка на сущность с информацией о компаниях
+  id_pilot          BIGINT NOT NULL,                        --// ссылка на сущность с информацией о пилотах
+  PRIMARY KEY(id),
+  FOREIGN KEY (id_type) REFERENCES type_aircraft(id),
+  FOREIGN KEY (id_company) REFERENCES company (id),
+  FOREIGN KEY (id_pilot) REFERENCES pilot (id)
 );
 
