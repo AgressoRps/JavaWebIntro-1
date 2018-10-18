@@ -60,13 +60,13 @@ public class PilotRestController {
     }
 
     @RequestMapping(value = "/{id}/FLIGHT", method = RequestMethod.POST)
-    public void block(@PathVariable("id") Long id)
+    public void flight(@PathVariable("id") Long id)
             throws InvalidDataException, ServerException, NotFoundException {
         pilotService.flight(id);
     }
 
     @RequestMapping(value = "/{id}/available", method = RequestMethod.POST)
-    public void unblock(@PathVariable("id") Long id) throws NotFoundException, ServerException {
+    public void available(@PathVariable("id") Long id) throws NotFoundException, ServerException {
         pilotService.available(id);
     }
 

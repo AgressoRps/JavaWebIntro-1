@@ -33,7 +33,7 @@ public class PilotController {
         ModelAndView resultUsersPage = new ModelAndView(USER_VIEWS_PATH + "list");
         resultUsersPage.addObject("filter", pilotFilterWrapper);
         resultUsersPage.addObject("page", pilotService.getPageByFilter(pageable, pilotFilterWrapper));
-        prepareUserModelAndView(resultUsersPage);
+        preparePilotModelAndView(resultUsersPage);
         return resultUsersPage;
     }
 
@@ -48,11 +48,11 @@ public class PilotController {
     public ModelAndView editPage(@PathVariable("id") Long id) throws ServerException {
         ModelAndView editPage = new ModelAndView(USER_VIEWS_PATH + "edit");
         editPage.addObject("user", pilotService.getById(id));
-        prepareUserModelAndView(editPage);
+        preparePilotModelAndView(editPage);
         return editPage;
     }
 
-    private void prepareUserModelAndView(ModelAndView modelAndView) {
+    private void preparePilotModelAndView(ModelAndView modelAndView) {
         modelAndView.addObject("statuses", PilotStatus.values());
     }
 }
