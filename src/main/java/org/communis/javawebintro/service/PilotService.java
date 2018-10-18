@@ -99,7 +99,7 @@ public class PilotService {
      * @param id идентификатор пилота
      * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
      */
-    public void block(Long id) throws ServerException {
+    public void flight(Long id) throws ServerException {
         try {
             Pilot pilot = getPilot(id);
 
@@ -118,7 +118,7 @@ public class PilotService {
      * @param id идентификатор пилота
      * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
      */
-    public void unblock(Long id) throws ServerException {
+    public void available(Long id) throws ServerException {
         try {
             Pilot pilot = getPilot(id);
             pilot.setStatus(PilotStatus.AVAILABLE);
