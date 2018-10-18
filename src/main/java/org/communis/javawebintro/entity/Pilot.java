@@ -27,7 +27,7 @@ public class Pilot {
     private String mail;
 
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(name = "status")
     private PilotStatus status;
 
     public Long getId() {

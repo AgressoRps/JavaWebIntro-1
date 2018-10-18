@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "type_aircraft")
-public class TypeAircraft {
+public class AircraftType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class TypeAircraft {
     @Column(name = "name")
     private String name;
 
-    public TypeAircraft(String name){
+    public AircraftType(String name){
         this.name = name;
     }
 
