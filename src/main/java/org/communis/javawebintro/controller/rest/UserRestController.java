@@ -9,13 +9,19 @@ import org.communis.javawebintro.exception.error.ErrorCodeConstants;
 import org.communis.javawebintro.exception.error.ErrorInformationBuilder;
 import org.communis.javawebintro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "admin/users")
@@ -37,21 +43,36 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.PATCH)
-    public void editPersonal(@Valid UserWrapper userWrapper, BindingResult bindingResult)
-            throws InvalidDataException, NotFoundException, ServerException {
+    public void editPersonal(@Valid UserWrapper userWrapper, BindingResult bindingResult,
+                             HttpServletResponse response)
+            throws InvalidDataException, NotFoundException, ServerException, IOException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
         userService.edit(userWrapper);
+        response.sendRedirect("/admin/users/");
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public void addUser(@Valid UserWrapper userWrapper, BindingResult bindingResult,
+                             HttpServletResponse response)
+            throws InvalidDataException, NotFoundException, ServerException, IOException {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
+        }
+        userService.add(userWrapper);
+        response.sendRedirect("/admin/users");
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.PATCH)
-    public void changePassword(@Valid UserPasswordWrapper passwordWrapper, BindingResult bindingResult)
-            throws InvalidDataException, NotFoundException, ServerException {
+    public void changePassword(@Valid UserPasswordWrapper passwordWrapper, BindingResult bindingResult,
+                               HttpServletResponse response)
+            throws InvalidDataException, NotFoundException, ServerException, IOException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
         userService.changePassword(passwordWrapper);
+        response.sendRedirect("/admin/users/" + passwordWrapper.getId());
     }
 
     @RequestMapping(value = "/{id}/block", method = RequestMethod.POST)
@@ -63,5 +84,10 @@ public class UserRestController {
     @RequestMapping(value = "/{id}/unblock", method = RequestMethod.POST)
     public void unblock(@PathVariable("id") Long id) throws NotFoundException, ServerException {
         userService.unblock(id);
+    }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable("id") Long id) throws NotFoundException, ServerException{
+        userService.delete(id);
     }
 }

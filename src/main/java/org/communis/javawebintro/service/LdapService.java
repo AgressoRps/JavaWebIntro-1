@@ -5,6 +5,7 @@ import org.communis.javawebintro.dto.LdapAuthWrapper;
 import org.communis.javawebintro.dto.LdapGroupInfo;
 import org.communis.javawebintro.dto.filters.LdapAuthFilterWrapper;
 import org.communis.javawebintro.entity.LdapAuth;
+import org.communis.javawebintro.entity.User;
 import org.communis.javawebintro.exception.ServerException;
 import org.communis.javawebintro.exception.error.ErrorCodeConstants;
 import org.communis.javawebintro.exception.error.ErrorInformationBuilder;
@@ -189,6 +190,21 @@ public class LdapService {
             ldapAuthRepository.save(auth);
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.LDAP_DEACTIVATE_ERROR), ex);
+        }
+    }
+
+    /**
+     * Удаляет сервер из базы
+     *
+     * @param id идентификатор сервера
+     * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
+     */
+    public void delete(Long id) throws ServerException{
+        try {
+            LdapAuth auth = ldapAuthRepository.findOne(id);
+            ldapAuthRepository.delete(auth);
+        }catch (Exception ex){
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.LDAP_DELETE_ERROR));
         }
     }
 }

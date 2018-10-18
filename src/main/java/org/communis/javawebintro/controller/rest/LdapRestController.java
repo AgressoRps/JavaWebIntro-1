@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -24,14 +26,16 @@ public class LdapRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Long add(LdapAuthWrapper ldapAuth) throws ServerException {
-        return ldapService.add(ldapAuth);
+    public void add(LdapAuthWrapper ldapAuth, HttpServletResponse response) throws ServerException, IOException {
+        ldapService.add(ldapAuth);
+        response.sendRedirect("/admin/ldap");
     }
 
     @RequestMapping(value = "", method = RequestMethod.PATCH)
-    public void edit(LdapAuthWrapper ldapAuth) throws ServerException {
+    public void edit(LdapAuthWrapper ldapAuth, HttpServletResponse response) throws ServerException, IOException {
         System.out.println(ldapAuth);
         ldapService.edit(ldapAuth);
+        response.sendRedirect("/admin/ldap");
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -50,12 +54,17 @@ public class LdapRestController {
     }
 
     @RequestMapping(value = "/{id}/activate", method = RequestMethod.POST)
-    public void activate(@PathVariable("id") Long id) throws ServerException {
+    public void activate(@PathVariable("id") Long id) throws ServerException, IOException {
         ldapService.activate(id);
     }
 
     @RequestMapping(value = "/{id}/deactivate", method = RequestMethod.POST)
-    public void deactivate(@PathVariable("id") Long id) throws ServerException {
+    public void deactivate(@PathVariable("id") Long id) throws ServerException, IOException {
         ldapService.deactivate(id);
+    }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+    public void deleteLdap(@PathVariable("id") Long id) throws ServerException, IOException{
+        ldapService.delete(id);
     }
 }

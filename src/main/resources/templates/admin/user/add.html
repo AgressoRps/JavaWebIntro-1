@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/form.css}"/>
 
     <script th:src="@{/static/js/validate_fields.js}"></script>
-    <script th:src="@{/static/js/admin/user/user-service.js}"></script>
-    <script th:src="@{/static/js/admin/user/user-controller.js}"></script>
+    <script th:src="@{/static/js/admin/user/service.js}"></script>
+    <script th:src="@{/static/js/admin/user/controller.js}"></script>
 </head>
 
 <body>
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="buttons-area col s12">
-                <button type="button" class="waves-effect waves-light btn" onclick="UserController.addUserEvent()">Добавить</button>
+                <button type="submit" class="waves-effect waves-light btn">Добавить</button>
             </div>
             <div class="col s12">
                 <div th:replace="fragments/error :: errorFragment"></div>

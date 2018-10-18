@@ -41,7 +41,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.naming.InvalidNameException;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -241,6 +240,23 @@ public class UserService implements UserDetailsService {
             throw ex;
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
+        }
+    }
+
+    /**
+     * Удаляет пользователя из базы
+     *
+     * @param id идентификатор пользователя
+     * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
+     */
+    public void delete(Long id) throws ServerException{
+        try {
+            User user = getUser(id);
+            userRepository.delete(user);
+        }catch (ServerException ex){
+            throw ex;
+        }catch (Exception ex){
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_DELETE_ERROR));
         }
     }
 

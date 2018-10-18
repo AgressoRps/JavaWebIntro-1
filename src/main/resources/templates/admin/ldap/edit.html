@@ -6,8 +6,8 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/form.css}"/>
 
-    <script th:src="@{/static/js/admin/ldap/ldap-service.js}"></script>
-    <script th:src="@{/static/js/admin/ldap/ldap-controller.js}"></script>
+    <script th:src="@{/static/js/admin/ldap/service.js}"></script>
+    <script th:src="@{/static/js/admin/ldap/controller.js}"></script>
 </head>
 <body>
 <header th:replace="fragments/header :: header(ldap, admin)"></header>
@@ -21,8 +21,20 @@
             </div>
         </div>
     </nav>
-    <form id="ldap-form" class="form-horizontal" method="PATCH" th:action="@{/admin/ldap}">
+    <form id="ldap-form" name="ldap-form" class="form-horizontal" th:method="PATCH" th:action="@{/admin/ldap}">
         <div th:replace="fragments/card/ldap :: ldapFields"></div>
+        <div class="buttons-area">
+            <button onclick="LdapController.deactivate()"
+                    th:if="${ldap.active == true}"
+                    type="button" class="waves-effect waves-light btn red">Отключить
+            </button>
+            <button onclick="LdapController.activate()"
+                    th:if="${ldap.active != true}"
+                    type="button" class="waves-effect waves-light btn green">Активировать
+            </button>
+            <button onclick="LdapController.deleteLdap()"
+                    type="button" class="waves-effect waves-light btn">Удалить</button>
+        </div>
     </form>
 </div>
 

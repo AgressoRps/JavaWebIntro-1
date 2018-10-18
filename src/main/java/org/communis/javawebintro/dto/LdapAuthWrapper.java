@@ -132,4 +132,148 @@ public class LdapAuthWrapper implements ObjectWrapper<LdapAuth> {
         userGroups.removeIf(group -> group.getGroups().isEmpty());
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDateOpen() {
+        return dateOpen;
+    }
+
+    public void setDateOpen(Date dateOpen) {
+        this.dateOpen = dateOpen;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public String getGroupsDirectory() {
+        return groupsDirectory;
+    }
+
+    public void setGroupsDirectory(String groupsDirectory) {
+        this.groupsDirectory = groupsDirectory;
+    }
+
+    public String getUsersDirectory() {
+        return usersDirectory;
+    }
+
+    public void setUsersDirectory(String usersDirectory) {
+        this.usersDirectory = usersDirectory;
+    }
+
+    public List<LdapGroupWrapper> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<LdapGroupWrapper> userGroups) {
+        this.userGroups = userGroups;
+    }
+
+    public LdapUserAttributesWrapper getUserAttributes() {
+        return userAttributes;
+    }
+
+    public void setUserAttributes(LdapUserAttributesWrapper userAttributes) {
+        this.userAttributes = userAttributes;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public String getGroupClass() {
+        return groupClass;
+    }
+
+    public void setGroupClass(String groupClass) {
+        this.groupClass = groupClass;
+    }
+
+    public String getUserClass() {
+        return userClass;
+    }
+
+    public void setUserClass(String userClass) {
+        this.userClass = userClass;
+    }
+
+    public String getLdapLogin() {
+        return ldapLogin;
+    }
+
+    public void setLdapLogin(String ldapLogin) {
+        this.ldapLogin = ldapLogin;
+    }
+
+    public String getLdapPassword() {
+        return ldapPassword;
+    }
+
+    public void setLdapPassword(String ldapPassword) {
+        this.ldapPassword = ldapPassword;
+    }
+
+    public boolean isCredentialsAuth() {
+        return credentialsAuth;
+    }
+
+    public void setCredentialsAuth(boolean credentialsAuth) {
+        this.credentialsAuth = credentialsAuth;
+    }
+
+    public boolean isRoleFromGroup() {
+        return roleFromGroup;
+    }
+
+    public void setRoleFromGroup(boolean roleFromGroup) {
+        this.roleFromGroup = roleFromGroup;
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
+    }
+
 }

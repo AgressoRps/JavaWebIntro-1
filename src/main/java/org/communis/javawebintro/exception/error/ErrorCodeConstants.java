@@ -23,6 +23,7 @@ public class ErrorCodeConstants {
 
     public static final ErrorCodeIdentifier LDAP_ACTIVATE_ERROR = LDAP.branch("6");
     public static final ErrorCodeIdentifier LDAP_DEACTIVATE_ERROR = LDAP.branch("7");
+    public static final ErrorCodeIdentifier LDAP_DELETE_ERROR = LDAP.branch("9");
 
     public static final ErrorCodeIdentifier USER = new ErrorCodeIdentifier("2");
     public static final ErrorCodeIdentifier USER_LIST_ERROR = USER.branch("1");
@@ -45,6 +46,8 @@ public class ErrorCodeConstants {
     public static final ErrorCodeIdentifier USER_UNBLOCK_ERROR = USER.branch("7");
 
     public static final ErrorCodeIdentifier USER_LDAP_EXIST_BD = USER.branch("8");
+
+    public static final ErrorCodeIdentifier USER_DELETE_ERROR = USER.branch("9");
 
     static {
         messages.put(DATA_NOT_FOUND, "Ошибка при получении реестра ldap-серверов");

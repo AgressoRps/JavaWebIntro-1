@@ -112,4 +112,124 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
     public boolean isActive(){
         return status == UserStatus.ACTIVE;
     }
+
+    public String getEMAIL_REGEXP() {
+        return EMAIL_REGEXP;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @NotNull
+    public String getName() {
+        return name;
+    }
+
+    public void setName(@NotNull String name) {
+        this.name = name;
+    }
+
+    @NotNull
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(@NotNull String surname) {
+        this.surname = surname;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    @NotNull
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(@NotNull String login) {
+        this.login = login;
+    }
+
+    @NotNull
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(@NotNull String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public Date getDateLastOnline() {
+        return dateLastOnline;
+    }
+
+    public void setDateLastOnline(Date dateLastOnline) {
+        this.dateLastOnline = dateLastOnline;
+    }
+
+    public Date getDateOpen() {
+        return dateOpen;
+    }
+
+    public void setDateOpen(Date dateOpen) {
+        this.dateOpen = dateOpen;
+    }
+
+    public Date getDateClose() {
+        return dateClose;
+    }
+
+    public void setDateClose(Date dateClose) {
+        this.dateClose = dateClose;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Long getIdLdap() {
+        return idLdap;
+    }
+
+    public void setIdLdap(Long idLdap) {
+        this.idLdap = idLdap;
+    }
 }

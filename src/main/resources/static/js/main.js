@@ -82,3 +82,46 @@ function showSuccess(response, id) {
         success.slideUp(500);
     });
 }
+function requestController(url, data) {
+    $.ajax({
+        method: "POST",
+        url: url,
+        data: data,
+        contentType: "application/x-www-form-urlencoded",
+        success: function (response) {
+            location.reload();
+            showSuccess(response);
+        },
+        error: function (response) {
+            if (response.status === 403) {
+                response.message = "У вас нет доступа для совершения данной операции";
+                showErrorModal(response);
+            }
+            if (response.status === 500) {
+                response.message = "Ошибка на сервере";
+                showErrorModal(response);
+            }
+        }
+    })
+}
+function deleteController(url, data) {
+    $.ajax({
+        method: "DELETE",
+        url: url,
+        data: data,
+        contentType: "application/x-www-form-urlencoded",
+        success: function (response) {
+            setTimeout('window.history.back()');
+        },
+        error: function (response) {
+            if (response.status === 403) {
+                response.message = "У вас нет доступа для совершения данной операции";
+                showErrorModal(response);
+            }
+            if (response.status === 500) {
+                response.message = "Ошибка на сервере";
+                showErrorModal(response);
+            }
+        }
+    })
+}

@@ -22,8 +22,8 @@
             </nav>
         </div>
         <div class="row row-eq-height">
-            <form id="user-form" class="form-horizontal col s7" style="padding-left: 0" method="PATCH"
-                  th:action="@{${action}}">
+            <form id="user-form" class="form-horizontal col s7" style="padding-left: 0" th:method="PATCH"
+                  th:action="@{/admin/users/}">
 
                 <input type="hidden" name="id" th:field="${user.id}"/>
 
@@ -86,19 +86,24 @@
                         <div class="input-field" th:hidden="${action == 'my/'}"
                              sec:authorize="hasRole('ROLE_ADMIN')">
                             <input name="status" th:field="${user.status}" hidden/>
-                            <input id="status" th:value="${user.status.getStringName()}" readonly type="text"/>
-                            <label for="status">Статус</label>
+                            <input id="status-user" th:value="${user.status.getStringName()}" readonly type="text"/>
+                            <label for="status-user">Статус</label>
                         </div>
                     </div>
                     <div class="buttons-area col s12">
-                        <button onclick="UserController.block()"
+                        <button onclick="UserController.blockUser()"
                                 th:if="${action == 'admin/users/' && user.status != T(org.communis.javawebintro.enums.UserStatus).BLOCK}"
                                 type="button" class="waves-effect waves-light btn">Заблокировать
                         </button>
-                        <button onclick="UserController.unblock()"
+                        <button onclick="UserController.unblockUser()"
                                 th:if="${action == 'admin/users/' && user.status == T(org.communis.javawebintro.enums.UserStatus).BLOCK}"
                                 type="button" class="waves-effect waves-light btn">Разблокировать
                         </button>
+                        <button onclick="UserController.deleteUser()"
+                                type="button" class="waves-effect waves-light btn">Удалить
+                        </button>
+                    </div>
+                    <div class="button-area col s12" style="text-align: center; padding-top: 15px;">
                         <button type="submit" class="waves-effect waves-light btn">Cохранить</button>
                     </div>
                     <div class="col s12" id="data-success">
@@ -108,10 +113,10 @@
                 </fieldset>
             </form>
 
-            <form id="password-form" class="form-horizontal col s5" style="padding-right: 0" method="PATCH"
-                  th:action="@{${action} + 'password'}">
-                <input type="hidden" name="id" th:field="${user.id}"/>
+            <form id="password-form" class="form-horizontal col s5" style="padding-right: 0" th:method="PATCH"
+                  th:action="@{/admin/users/password}">
                 <fieldset class="full-height">
+                    <input type="hidden" name="id" th:field="${user.id}"/>
                     <legend>Смена пароля</legend>
                     <div class="input-field">
                         <input type="password" id="password" name="password"

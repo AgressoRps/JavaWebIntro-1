@@ -181,14 +181,6 @@
     </div>
 
     <div class="buttons-area">
-        <button onclick="LdapController.deactivate()"
-                th:if="${ldap.active == true}"
-                type="button" class="waves-effect waves-light btn red">Отключить
-        </button>
-        <button onclick="LdapController.activate()"
-                th:if="${ldap.active != true}"
-                type="button" class="waves-effect waves-light btn green">Активировать
-        </button>
         <button type="submit" class="waves-effect waves-light btn">Принять</button>
     </div>
     <div th:replace="fragments/error :: errorModalFragment"></div>

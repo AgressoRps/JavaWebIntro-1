@@ -29,4 +29,28 @@ public class Permission {
         this.action = action;
         this.role = role;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserAction getAction() {
+        return action;
+    }
+
+    public void setAction(UserAction action) {
+        this.action = action;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 }

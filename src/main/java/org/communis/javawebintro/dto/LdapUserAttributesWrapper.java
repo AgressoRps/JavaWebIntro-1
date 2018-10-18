@@ -45,4 +45,12 @@ public class LdapUserAttributesWrapper implements ObjectWrapper<LdapUserAttribut
             item.setLogin(login);
         }
     }
+
+    public Long getIdLdap() {
+        return idLdap;
+    }
+
+    public void setIdLdap(Long idLdap) {
+        this.idLdap = idLdap;
+    }
 }
