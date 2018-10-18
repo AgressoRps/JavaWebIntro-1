@@ -45,10 +45,19 @@ public class ErrorCodeConstants {
     public static final ErrorCodeIdentifier USER_LDAP_NOT_EXIST = USER_BLOCK_ERROR.branch("2");
 
     public static final ErrorCodeIdentifier USER_UNBLOCK_ERROR = USER.branch("7");
-
     public static final ErrorCodeIdentifier USER_LDAP_EXIST_BD = USER.branch("8");
-
     public static final ErrorCodeIdentifier USER_DELETE_ERROR = USER.branch("9");
+
+    public static final ErrorCodeIdentifier AIRCRAFT = new ErrorCodeIdentifier("3");
+    public static final ErrorCodeIdentifier AIRCRAFT_LIST_ERROR = AIRCRAFT.branch("1");
+    public static final ErrorCodeIdentifier AIRCRAFT_INFO_ERROR = AIRCRAFT.branch("2");
+    public static final ErrorCodeIdentifier AIRCRAFT_ADD_ERROR = AIRCRAFT.branch("3");
+    public static final ErrorCodeIdentifier AIRCRAFT_UPDATE_ERROR = AIRCRAFT.branch("4");
+
+    public static final ErrorCodeIdentifier AIRCRAFT_GROUPS_ERROR = AIRCRAFT.branch("5");
+    public static final ErrorCodeIdentifier AIRCRAFT_ACTIVATE_ERROR = AIRCRAFT.branch("6");
+    public static final ErrorCodeIdentifier AIRCRAFT_DEACTIVATE_ERROR = AIRCRAFT.branch("7");
+    public static final ErrorCodeIdentifier AIRCRAFT_DELETE_ERROR = AIRCRAFT.branch("9");
 
     static {
         messages.put(DATA_NOT_FOUND, "Ошибка при получении реестра ldap-серверов");
@@ -87,5 +96,13 @@ public class ErrorCodeConstants {
 
         messages.put(USER_LDAP_EXIST_BD, "Невозможно добавить пользователя из ldap, " +
                 "так как в БД уже сущесвует пользователь с другим типом авторизации");
+
+        messages.put(AIRCRAFT_LIST_ERROR, "Ошибка при получении реестра самолетов");
+        messages.put(AIRCRAFT_INFO_ERROR, "Ошибка при получении информации о самолете");
+        messages.put(AIRCRAFT_ADD_ERROR, "Ошибка при добавлении информации о самолете");
+        messages.put(AIRCRAFT_UPDATE_ERROR, "Ошибка при изменении информации о самолете");
+
+        messages.put(AIRCRAFT_ACTIVATE_ERROR, "Ошибка при изменении состояния самолета на 'доступный'");
+        messages.put(AIRCRAFT_DEACTIVATE_ERROR, "Ошибка при при изменении состояния самолета на 'в полете'");
     }
 }
