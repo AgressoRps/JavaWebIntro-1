@@ -95,10 +95,18 @@ CREATE TABLE type_aircraft                                  --// сущност�
   PRIMARY KEY(id)
 );
 
+CREATE TABLE name_aircraft                                  --// сущность для хранения наименований моделей самолетов
+(
+  id              BIGINT AUTO_INCREMENT NOT NULL,           --// уникальный идентификатор
+  name            CHARACTER VARYING NOT NULL,               --// наименование модели
+  PRIMARY KEY(id)
+)
+
 CREATE TABLE aircraft                                       --// сущность для хранения самолетов
 (
   id                BIGINT AUTO_INCREMENT NOT NULL,         --// уникальный идентификатор
-  places            INTEGER NOT NULL,                      --// количество мест в самолете
+  id_name           BIGINT NOT NULL,             --// модель самолета
+  places            INTEGER NOT NULL,                       --// количество мест в самолете
   condition_air     BOOLEAN DEFAULT FALSE NOT NULL,         --// флаг, на ремонте либо нет
   id_type           BIGINT NOT NULL,                        --// ссылка на сущность с информацией о типах самолетов
   id_company        BIGINT NOT NULL,                        --// ссылка на сущность с информацией о компаниях
