@@ -32,7 +32,25 @@ public class AircraftTypeWrapper implements ObjectWrapper<AircraftType>, Seriali
     @Override
     public void fromWrapper(AircraftType item) {
         if (item != null){
+            item.setId(id);
             item.setName(name);
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @NotNull
+    public String getName() {
+        return name;
+    }
+
+    public void setName(@NotNull String name) {
+        this.name = name;
     }
 }

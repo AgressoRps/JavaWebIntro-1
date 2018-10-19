@@ -17,6 +17,8 @@ public class Company {
     @Column(name = "name")
     private String name;
 
+    public Company(){}
+
     public Company(String name){
         this.name = name;
     }

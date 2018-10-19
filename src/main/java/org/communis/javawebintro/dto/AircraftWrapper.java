@@ -1,7 +1,7 @@
 package org.communis.javawebintro.dto;
 
 import org.communis.javawebintro.dto.ObjectWrapper;
-import org.communis.javawebintro.entity.Aircraft;
+import org.communis.javawebintro.entity.*;
 import org.communis.javawebintro.enums.AircraftStatus;
 
 import javax.validation.constraints.NotNull;
@@ -11,16 +11,16 @@ import java.io.Serializable;
 public class AircraftWrapper implements ObjectWrapper<Aircraft>, Serializable {
 
     private Long id;
-    private Long idAircraftName;
+    private AircraftNameWrapper aircraftName = new AircraftNameWrapper();
 
     @NotNull
     @Size(max = 10)
     private Integer countPlaces;
 
     private AircraftStatus status;
-    private Long idAircraftType;
-    private Long idCompany;
-    private Long idPilot;
+    private AircraftTypeWrapper aircraftType = new AircraftTypeWrapper();
+    private CompanyWrapper company = new CompanyWrapper();
+    private PilotWrapper pilot = new PilotWrapper();
 
     public AircraftWrapper(){
 
@@ -35,20 +35,37 @@ public class AircraftWrapper implements ObjectWrapper<Aircraft>, Serializable {
         if(item!=null)
         {
             id = item.getId();
-            idAircraftName = item.getAircraftName().getId();
+            aircraftName = new AircraftNameWrapper(item.getAircraftName());
             countPlaces = item.getCountPlaces();
             status = item.getStatus();
-            idAircraftType = item.getAircraftType().getId();
-            idCompany = item.getCompany().getId();
-            idPilot = item.getPilot().getId();
+            aircraftType = new AircraftTypeWrapper(item.getAircraftType());
+            company = new CompanyWrapper(item.getCompany());
+            pilot = new PilotWrapper(item.getPilot());
         }
     }
 
     @Override
     public void fromWrapper(Aircraft item) {
         if(item!=null) {
+            item.setId(id);
             item.setCountPlaces(countPlaces);
             item.setStatus(status);
+
+            AircraftName aircraftNameAttr = new AircraftName();
+            aircraftName.fromWrapper(aircraftNameAttr);
+            item.setAircraftName(aircraftNameAttr);
+
+            AircraftType aircraftTypeAttr = new AircraftType();
+            aircraftType.fromWrapper(aircraftTypeAttr);
+            item.setAircraftType(aircraftTypeAttr);
+
+            Company companyAttr = new Company();
+            company.fromWrapper(companyAttr);
+            item.setCompany(companyAttr);
+
+            Pilot pilotAttr = new Pilot();
+            pilot.fromWrapper(pilotAttr);
+            item.setPilot(pilotAttr);
         }
     }
 
@@ -56,59 +73,60 @@ public class AircraftWrapper implements ObjectWrapper<Aircraft>, Serializable {
         return status == AircraftStatus.AVAILABLE;
     }
 
-    public String getStatus(){
-        return status.getStringName();
-    }
-
-    public Integer getCountPlaces(){
-        return countPlaces;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getIdAircraftName() {
-        return idAircraftName;
+    public AircraftNameWrapper getAircraftName() {
+        return aircraftName;
     }
 
-    public void setIdAircraftName(long idAircraftName) {
-        this.idAircraftName = idAircraftName;
+    public void setAircraftName(AircraftNameWrapper aircraftName) {
+        this.aircraftName = aircraftName;
+    }
+
+    @NotNull
+    public Integer getCountPlaces() {
+        return countPlaces;
     }
 
     public void setCountPlaces(@NotNull Integer countPlaces) {
         this.countPlaces = countPlaces;
     }
 
+    public AircraftStatus getStatus() {
+        return status;
+    }
+
     public void setStatus(AircraftStatus status) {
         this.status = status;
     }
 
-    public long getIdAircraftType() {
-        return idAircraftType;
+    public AircraftTypeWrapper getAircraftType() {
+        return aircraftType;
     }
 
-    public void setIdAircraftType(long idAircraftType) {
-        this.idAircraftType = idAircraftType;
+    public void setAircraftType(AircraftTypeWrapper aircraftType) {
+        this.aircraftType = aircraftType;
     }
 
-    public long getIdCompany() {
-        return idCompany;
+    public CompanyWrapper getCompany() {
+        return company;
     }
 
-    public void setIdCompany(long idCompany) {
-        this.idCompany = idCompany;
+    public void setCompany(CompanyWrapper company) {
+        this.company = company;
     }
 
-    public long getIdPilot() {
-        return idPilot;
+    public PilotWrapper getPilot() {
+        return pilot;
     }
 
-    public void setIdPilot(long idPilot) {
-        this.idPilot = idPilot;
+    public void setPilot(PilotWrapper pilot) {
+        this.pilot = pilot;
     }
 }

@@ -17,6 +17,8 @@ public class AircraftType {
     @Column(name = "name")
     private String name;
 
+    public AircraftType(){}
+
     public AircraftType(String name){
         this.name = name;
     }
