@@ -127,4 +127,9 @@ public class PilotWrapper implements ObjectWrapper<Pilot>, Serializable {
     public void setStatus(PilotStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return surname + " " + name + " " + secondName;
+    }
 }

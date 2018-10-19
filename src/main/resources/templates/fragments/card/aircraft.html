@@ -6,7 +6,7 @@
         <div class="col s12">
             <fieldset>
                 <legend>Информация о самолете</legend>
-                <div class="col s6">
+                <div class="col s12">
                     <div class="input-field">
                         <select id="name" th:field="${aircraft.aircraftName}" name="name"  required>
                             <option th:value="${null}">Не назначено</option>
@@ -16,8 +16,52 @@
                         </select>
                         <label for="name">Наименование самолета:</label>
                     </div>
+                </div>
+                <div class="col s12">
+                    <div class="input-field">
+                        <select id="type" th:field="${aircraft.aircraftType}" name="type"  required>
+                            <option th:value="${null}">Не назначено</option>
+                            <option th:each="r : ${types}"
+                                    th:value="${r.getName()}"
+                                    th:text="${r.getName()}"></option>
+                        </select>
+                        <label for="name">Тип самолета:</label>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="input-field">
+                        <select id="pilot" th:field="${aircraft.pilot}" name="pilot"  required>
+                            <option th:value="${null}">Не назначено</option>
+                            <option th:each="r : ${pilots}"
+                                    th:value="${r.getName()}"
+                                    th:text="${r.toString()}"></option>
+                        </select>
+                        <label for="name">Пилот:</label>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="input-field">
+                        <select id="company" th:field="${aircraft.company}" name="company"  required>
+                            <option th:value="${null}">Не назначено</option>
+                            <option th:each="r : ${companies}"
+                                    th:value="${r.getName()}"
+                                    th:text="${r.getName()}"></option>
+                        </select>
+                        <label for="name">Пилот:</label>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="input-field">
+                        <input id="countPlaces" name="countPlaces" type="text" required th:field="${aircraft.countPlaces}"/>
+                        <label for="countPlaces">Количество мест:</label>
+                    </div>
+                </div>
             </fieldset>
         </div>
+    </div>
+    <div class="buttons-area">
+        <button type="submit" class="waves-effect waves-light btn">Принять</button>
+    </div>
     <div th:replace="fragments/error :: errorModalFragment"></div>
 </div>
 </html>
