@@ -22,12 +22,12 @@
             </nav>
         </div>
         <div class="row row-eq-height">
-            <form id="pilot-form" class="form-horizontal col s7" style="padding-left: 0" th:method="PATCH"
+            <form id="pilot-form" class="form-horizontal col s12" th:method="PATCH"
                   th:action="@{/admin/pilots/}">
                 <input type="hidden" name="id" th:field="${pilot.id}"/>
                 <fieldset>
                     <legend>Личная информация</legend>
-                    <div class="col s6">
+                    <div class="col s12">
                         <div class="input-field">
                             <input id="surname" name="surname" class="required validate"
                                    maxlength="100" type="text"
@@ -47,7 +47,7 @@
                             <label for="second-name">Отчество</label>
                         </div>
                     </div>
-                    <div class="col s6">
+                    <div class="col s12">
                         <div class="input-field">
                             <input id="email" name="email" class="required validate email" maxlength="256"
                                    type="email"
@@ -64,11 +64,11 @@
                     <div class="buttons-area col s12">
                         <button onclick="PilotController.flightPilot()"
                                 th:if="${action == 'admin/pilots/' && pilot.status != T(org.communis.javawebintro.enums.PilotStatus).FLIGHT}"
-                                type="button" class="waves-effect waves-light btn">Заблокировать
+                                type="button" class="waves-effect waves-light btn">Отправить в рейс
                         </button>
                         <button onclick="PilotController.availablePilot()"
                                 th:if="${action == 'admin/pilots/' && pilot.status == T(org.communis.javawebintro.enums.PilotStatus).FLIGHT}"
-                                type="button" class="waves-effect waves-light btn">Разблокировать
+                                type="button" class="waves-effect waves-light btn">Вернулся
                         </button>
                         <button onclick="PilotController.deletePilot()"
                                 type="button" class="waves-effect waves-light btn">Удалить

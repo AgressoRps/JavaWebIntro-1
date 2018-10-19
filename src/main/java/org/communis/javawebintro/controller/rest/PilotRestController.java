@@ -59,7 +59,7 @@ public class PilotRestController {
         response.sendRedirect("/admin/pilots");
     }
 
-    @RequestMapping(value = "/{id}/FLIGHT", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/flight", method = RequestMethod.POST)
     public void flight(@PathVariable("id") Long id)
             throws InvalidDataException, ServerException, NotFoundException {
         pilotService.flight(id);

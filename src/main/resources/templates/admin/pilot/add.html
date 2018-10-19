@@ -27,7 +27,7 @@
         <input type="hidden" name="id" th:field="${pilot.id}"/>
         <fieldset>
             <legend>Данные пилота</legend>
-            <div class="col s4">
+            <div class="col s12">
                 <div class="input-field">
                     <input id="surname" name="surname" type="text"  class="required validate"
                            maxlength="100" th:field="${pilot.surname}"/>
@@ -44,7 +44,7 @@
                     <label for="second-name">Отчество</label>
                 </div>
             </div>
-            <div class="col s4">
+            <div class="col s12">
                 <div class="input-field">
                     <input id="email" name="email"
                            maxlength="256" class="required email validate" type="email" th:field="${pilot.mail}"/>
