@@ -11,22 +11,23 @@
     <script th:src="@{/static/js/filter.js}"></script>
 </head>
 <body>
-<header th:replace="fragments/header :: header(ldap, admin)"></header>
+<header th:replace="fragments/header :: header(aircraft, admin)"></header>
 
 <div class="col s12 main-container">
-    <form th:action="@{/admin/ldap}" method="get" th:object="${filter}">
+    <form th:action="@{/admin/aircraft}" method="get" th:object="${filter}">
         <div class="filter-area">
-            <div th:replace="fragments/filter :: filter('/admin/ldap/add', '/admin/ldap', 'Реестр ldap-серверов')"></div>
+            <div th:replace="fragments/filter :: filter('/admin/aircraft/add', '/admin/aircraft', 'Реестр самолетов')"></div>
             <div th:class="${'filter-content '+ (filter.isFilterExist() ? 'filter-open' : '')}">
                 <div class="row row-eq-height">
                     <div class="col s3">
                         <div class="input-field select-form">
-                            <select th:field="*{active}">
+                            <select th:field="*{status}">
                                 <option th:value="${null}">Все</option>
-                                <option th:value="1">Активирована</option>
-                                <option th:value="0">Отключена</option>
+                                <option th:each="s : ${statuses}"
+                                        th:value="${s.toString()}"
+                                        th:text="${s.getStringName()}"></option>
                             </select>
-                            <label>Статус авторизации</label>
+                            <label>Статус:</label>
                         </div>
                     </div>
                 </div>
@@ -38,18 +39,18 @@
             <thead>
             <tr>
                 <th>Имя</th>
-                <th>Адрес</th>
-                <th>Порт</th>
+                <th>Тип</th>
+                <th>Компания</th>
                 <th>Состояние</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:class="${ldap.active} ? 'clickable' : 'clickable inactive-row' " th:each="ldap : ${page}"
-                th:onclick="'request(\'' + @{|/admin/ldap/${ldap.id}|}+ '\');'">
-                <td th:text="${ldap.name}"></td>
-                <td th:text="${ldap.address}"></td>
-                <td th:text="${ldap.port}"></td>
-                <td th:text="${ldap.active} ? 'Активирована' : 'Отключена'"></td>
+            <tr th:class="${aircraft.isAvailable()} ? 'clickable' : 'clickable inactive-row' " th:each="aircraft : ${page}"
+                th:onclick="'request(\'' + @{|/admin/aircraft/${aircraft.id}|}+ '\');'">
+                <td th:text="${aircraft.aircraftName.getName()}"></td>
+                <td th:text="${aircraft.aircraftType.getName()}"></td>
+                <td th:text="${aircraft.getCompany().getName()}"></td>
+                <td th:text="${aircraft.status.getStringName()}"></td>
             </tr>
             </tbody>
         </table>

@@ -77,6 +77,9 @@ CREATE TABLE company                                      --// сущность 
   PRIMARY KEY(id)
 );
 
+INSERT INTO company (name)
+VALUES('Уральский союз');
+
 CREATE TABLE pilot                                          --// сущность для хранения пилотов
 (
   id              BIGINT AUTO_INCREMENT NOT NULL,           --// уникальный идентификатор
@@ -98,12 +101,20 @@ CREATE TABLE type_aircraft                                  --// сущност�
   PRIMARY KEY(id)
 );
 
+INSERT INTO type_aircraft (name)
+VALUES('Средний пассажирский самолет');
+
 CREATE TABLE name_aircraft                                  --// сущность для хранения наименований моделей самолетов
 (
   id              BIGINT AUTO_INCREMENT NOT NULL,           --// уникальный идентификатор
   name            CHARACTER VARYING NOT NULL,               --// наименование модели
   PRIMARY KEY(id)
 );
+
+INSERT INTO name_aircraft (name)
+VALUES('ТУ-134');
+INSERT INTO name_aircraft (name)
+VALUES('ТУ-127');
 
 CREATE TABLE aircraft                                       --// сущность для хранения самолетов
 (
@@ -120,4 +131,9 @@ CREATE TABLE aircraft                                       --// сущност�
   FOREIGN KEY (id_company) REFERENCES company (id),
   FOREIGN KEY (id_pilot) REFERENCES pilot (id)
 );
+
+INSERT INTO aircraft (id_name, places, condition_air, id_type, id_company, id_pilot)
+VALUES(1, 130, 'REPAIR', 1, 1, 1);
+INSERT INTO aircraft (id_name, places, condition_air, id_type, id_company, id_pilot)
+VALUES(2, 142, 'AVAILABLE', 1, 1, 1);
 
