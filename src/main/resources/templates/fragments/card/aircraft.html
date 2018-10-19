@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<div th:fragment="aircraftFields">
+    <input type="hidden" name="id" th:field="${aircraft.id}"/>
+    <div class="row">
+        <div class="col s12">
+            <fieldset>
+                <legend>Информация о самолете</legend>
+                <div class="col s6">
+                    <div class="input-field">
+                        <select id="name" th:field="${aircraft.aircraftName}" name="name"  required>
+                            <option th:value="${null}">Не назначено</option>
+                            <option th:each="r : ${names}"
+                                    th:value="${r.getName()}"
+                                    th:text="${r.getName()}"></option>
+                        </select>
+                        <label for="name">Наименование самолета:</label>
+                    </div>
+            </fieldset>
+        </div>
+    <div th:replace="fragments/error :: errorModalFragment"></div>
+</div>
+</html>

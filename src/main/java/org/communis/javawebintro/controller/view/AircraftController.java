@@ -1,5 +1,6 @@
 package org.communis.javawebintro.controller.view;
 
+import org.communis.javawebintro.dto.AircraftNameWrapper;
 import org.communis.javawebintro.dto.AircraftWrapper;
 import org.communis.javawebintro.dto.filters.AircraftFilterWrapper;
 import org.communis.javawebintro.enums.AircraftStatus;
@@ -35,9 +36,10 @@ public class AircraftController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView add() {
+    public ModelAndView add() throws ServerException {
         ModelAndView addPage = new ModelAndView(LDAP_VIEW_PATH + "add");
         addPage.addObject("aircraft", new AircraftWrapper());
+        prepareAircraftEditAndAdd(addPage);
         prepareAircraftModelAndView(addPage);
         return addPage;
     }
@@ -46,8 +48,16 @@ public class AircraftController {
     public ModelAndView edit(@PathVariable("id") Long id) throws ServerException {
         ModelAndView addPage = new ModelAndView(LDAP_VIEW_PATH + "edit");
         addPage.addObject("aircraft", aircraftService.getForEdit(id));
+        prepareAircraftEditAndAdd(addPage);
         prepareAircraftModelAndView(addPage);
         return addPage;
+    }
+
+    private void prepareAircraftEditAndAdd(ModelAndView modelAndView) throws ServerException {
+        modelAndView.addObject("names", aircraftService.getAllNames());
+        modelAndView.addObject("types", aircraftService.getAllTypes());
+        modelAndView.addObject("pilots", aircraftService.getAllPilots());
+        modelAndView.addObject("companies", aircraftService.getAllCompanies());
     }
 
     private void prepareAircraftModelAndView(ModelAndView modelAndView) {

@@ -22,7 +22,7 @@
             </nav>
         </div>
         <div class="row row-eq-height">
-            <form id="user-form" class="form-horizontal col s7" style="padding-left: 0" th:method="PATCH"
+            <form id="pilot-form" class="form-horizontal col s7" style="padding-left: 0" th:method="PATCH"
                   th:action="@{/admin/pilots/}">
                 <input type="hidden" name="id" th:field="${pilot.id}"/>
                 <fieldset>
@@ -57,8 +57,8 @@
                         <div class="input-field" th:hidden="${action == 'my/'}"
                              sec:authorize="hasRole('ROLE_ADMIN')">
                             <input name="status" th:field="${pilot.status}" hidden/>
-                            <input id="status-user" th:value="${pilot.status.getStringName()}" readonly type="text"/>
-                            <label for="status-user">Статус</label>
+                            <input id="status-pilot" th:value="${pilot.status.getStringName()}" readonly type="text"/>
+                            <label for="status-pilot">Статус</label>
                         </div>
                     </div>
                     <div class="buttons-area col s12">

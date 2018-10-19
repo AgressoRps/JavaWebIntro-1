@@ -1,9 +1,12 @@
 package org.communis.javawebintro.service;
 
-import org.communis.javawebintro.dto.AircraftWrapper;
+import org.communis.javawebintro.dto.*;
 import org.communis.javawebintro.dto.filters.AircraftFilterWrapper;
 import org.communis.javawebintro.entity.Aircraft;
+import org.communis.javawebintro.entity.AircraftName;
+import org.communis.javawebintro.entity.Pilot;
 import org.communis.javawebintro.enums.AircraftStatus;
+import org.communis.javawebintro.enums.PilotStatus;
 import org.communis.javawebintro.exception.ServerException;
 import org.communis.javawebintro.exception.error.ErrorCodeConstants;
 import org.communis.javawebintro.exception.error.ErrorInformationBuilder;
@@ -172,6 +175,58 @@ public class AircraftService {
             aircraftRepository.delete(auth);
         }catch (Exception ex){
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_DELETE_ERROR));
+        }
+    }
+
+    /**
+     * Получает из базы список всех имен самолетов
+     *
+     * @return список всех доступных имен самолетов в виде объектов класса {@link AircraftNameWrapper}
+     */
+    public List<AircraftNameWrapper> getAllNames() throws ServerException {
+        try {
+            return nameRepository.findAll().stream().map(AircraftNameWrapper::new).collect(Collectors.toList());
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_LIST_ERROR), ex);
+        }
+    }
+
+    /**
+     * Получает из базы список всех типов самолетов
+     *
+     * @return список всех доступных типов самолетов в виде объектов класса {@link AircraftTypeWrapper}
+     */
+    public List<AircraftTypeWrapper> getAllTypes() throws ServerException {
+        try {
+            return typeRepository.findAll().stream().map(AircraftTypeWrapper::new).collect(Collectors.toList());
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_LIST_ERROR), ex);
+        }
+    }
+
+    /**
+     * Получает из базы список всех доступных пилотов, если пилот в рейсе, то он не отображается
+     *
+     * @return список всех доступных пилотов в виде объектов класса {@link PilotWrapper}
+     */
+    public List<PilotWrapper> getAllPilots() throws ServerException {
+        try {
+            return pilotRepository.findByStatus(PilotStatus.AVAILABLE).stream().map(PilotWrapper::new).collect(Collectors.toList());
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_LIST_ERROR), ex);
+        }
+    }
+
+    /**
+     * Получает из базы список всех компаний
+     *
+     * @return список всех компаний в виде объектов класса {@link CompanyWrapper}
+     */
+    public List<CompanyWrapper> getAllCompanies() throws ServerException {
+        try {
+            return companyRepository.findAll().stream().map(CompanyWrapper::new).collect(Collectors.toList());
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_LIST_ERROR), ex);
         }
     }
 }
