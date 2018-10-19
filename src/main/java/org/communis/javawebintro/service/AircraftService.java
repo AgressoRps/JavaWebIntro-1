@@ -84,11 +84,12 @@ public class AircraftService {
      */
     public void edit(AircraftWrapper aircraftWrapper) throws ServerException {
         try {
-            Aircraft ldapAuth = aircraftRepository.findOne(aircraftWrapper.getId());
-            aircraftWrapper.fromWrapper(ldapAuth);
+            Aircraft aircraft = aircraftRepository.findOne(aircraftWrapper.getId());
+            aircraftWrapper.fromWrapper(aircraft);
+
             System.out.println("ldapAuthWrapper:");
             System.out.println(aircraftWrapper);
-            aircraftRepository.save(ldapAuth);
+            aircraftRepository.save(aircraft);
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_UPDATE_ERROR), ex);
         }
@@ -105,16 +106,6 @@ public class AircraftService {
             return new AircraftWrapper(aircraftRepository.findOne(id));
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_INFO_ERROR), ex);
-        }
-    }
-
-    public List<String> getGroups(AircraftWrapper wrapper) throws ServerException {
-        try {
-            //TODO получать
-            return null;
-
-        } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.AIRCRAFT_GROUPS_ERROR), ex);
         }
     }
 

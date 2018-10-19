@@ -22,16 +22,9 @@
         </div>
     </nav>
     <form id="aircraft-form" name="aircraft-form" class="form-horizontal" th:method="PATCH" th:action="@{/admin/aircraft}">
-        <div th:replace="fragments/card/aircraft :: aircraftFields"></div>
+        <input type="hidden" name="status" th:field="${aircraft.status}"/>
+        <div th:replace="fragments/card/aircraft :: aircraftFields('admin/aircraft/')"></div>
         <div class="buttons-area">
-            <button onclick="AircraftController.repairAircraft()"
-                    th:if="${action == 'admin/aircraft/' && aircraft.status != T(org.communis.javawebintro.enums.AircraftStatus).REPAIR}"
-                    type="button" class="waves-effect waves-light btn red">Отключить
-            </button>
-            <button onclick="AircraftController.available()"
-                    th:if="${action == 'admin/aircraft/' && aircraft.status == T(org.communis.javawebintro.enums.PilotStatus).REPAIR}"
-                    type="button" class="waves-effect waves-light btn green">Активировать
-            </button>
             <button onclick="AircraftController.deleteAircraft()"
                     type="button" class="waves-effect waves-light btn">Удалить</button>
         </div>

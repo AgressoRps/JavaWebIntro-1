@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
-<div th:fragment="aircraftFields">
+<div th:fragment="aircraftFields(action)">
     <input type="hidden" name="id" th:field="${aircraft.id}"/>
     <div class="row">
         <div class="col s12">
@@ -8,10 +8,10 @@
                 <legend>Информация о самолете</legend>
                 <div class="col s12">
                     <div class="input-field">
-                        <select id="name" th:field="${aircraft.aircraftName}" name="name"  required>
+                        <select id="name" th:field="${aircraft.aircraftName.id}" name="name"  required>
                             <option th:value="${null}">Не назначено</option>
                             <option th:each="r : ${names}"
-                                    th:value="${r.getName()}"
+                                    th:value="${r.getId()}"
                                     th:text="${r.getName()}"></option>
                         </select>
                         <label for="name">Наименование самолета:</label>
@@ -19,21 +19,22 @@
                 </div>
                 <div class="col s12">
                     <div class="input-field">
-                        <select id="type" th:field="${aircraft.aircraftType}" name="type"  required>
+                        <select id="type" th:field="${aircraft.aircraftType.id}" name="type"  required>
                             <option th:value="${null}">Не назначено</option>
                             <option th:each="r : ${types}"
-                                    th:value="${r.getName()}"
+                                    th:value="${r.getId()}"
                                     th:text="${r.getName()}"></option>
                         </select>
                         <label for="name">Тип самолета:</label>
                     </div>
                 </div>
+
                 <div class="col s12">
                     <div class="input-field">
-                        <select id="pilot" th:field="${aircraft.pilot}" name="pilot"  required>
+                        <select id="pilot" th:field="${aircraft.pilot.id}" name="pilot"  required>
                             <option th:value="${null}">Не назначено</option>
                             <option th:each="r : ${pilots}"
-                                    th:value="${r.getName()}"
+                                    th:value="${r.getId()}"
                                     th:text="${r.toString()}"></option>
                         </select>
                         <label for="name">Пилот:</label>
@@ -41,13 +42,13 @@
                 </div>
                 <div class="col s12">
                     <div class="input-field">
-                        <select id="company" th:field="${aircraft.company}" name="company"  required>
+                        <select id="company" th:field="${aircraft.company.id}" name="company"  required>
                             <option th:value="${null}">Не назначено</option>
                             <option th:each="r : ${companies}"
-                                    th:value="${r.getName()}"
+                                    th:value="${r.getId()}"
                                     th:text="${r.getName()}"></option>
                         </select>
-                        <label for="name">Пилот:</label>
+                        <label for="name">Компания:</label>
                     </div>
                 </div>
                 <div class="col s12">
@@ -59,8 +60,18 @@
             </fieldset>
         </div>
     </div>
-    <div class="buttons-area">
-        <button type="submit" class="waves-effect waves-light btn">Принять</button>
+    <div class="row">
+        <div class="buttons-area">
+            <button onclick="AircraftController.repairAircraft()"
+                    th:if="${action == 'admin/aircraft/' && aircraft.status != T(org.communis.javawebintro.enums.AircraftStatus).REPAIR}"
+                    type="button" class="waves-effect waves-light btn red">Отправить на ремонт
+            </button>
+            <button onclick="AircraftController.available()"
+                    th:if="${action == 'admin/aircraft/' && aircraft.status == T(org.communis.javawebintro.enums.AircraftStatus).REPAIR}"
+                    type="button" class="waves-effect waves-light btn green">Вернуть с ремонта
+            </button>
+            <button type="submit" class="waves-effect waves-light btn">Принять</button>
+        </div>
     </div>
     <div th:replace="fragments/error :: errorModalFragment"></div>
 </div>

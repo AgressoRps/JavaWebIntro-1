@@ -3,6 +3,7 @@ package org.communis.javawebintro.controller.view;
 import org.communis.javawebintro.dto.AircraftNameWrapper;
 import org.communis.javawebintro.dto.AircraftWrapper;
 import org.communis.javawebintro.dto.filters.AircraftFilterWrapper;
+import org.communis.javawebintro.entity.Aircraft;
 import org.communis.javawebintro.enums.AircraftStatus;
 import org.communis.javawebintro.exception.ServerException;
 import org.communis.javawebintro.service.AircraftService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.jws.WebParam;
 
 @Controller
 @RequestMapping(value = "/admin/aircraft")

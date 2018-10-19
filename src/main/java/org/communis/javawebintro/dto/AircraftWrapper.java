@@ -85,8 +85,18 @@ public class AircraftWrapper implements ObjectWrapper<Aircraft>, Serializable {
         return aircraftName;
     }
 
-    public void setAircraftName(AircraftNameWrapper aircraftName) {
-        this.aircraftName = aircraftName;
+    public void setAircraftName(Long id, String name) {
+        AircraftNameWrapper wrapper = new AircraftNameWrapper();
+        wrapper.setId(id);
+        wrapper.setName(name);
+        aircraftName = wrapper;
+    }
+
+    public void setAircraftType(Long id, String name) {
+        AircraftTypeWrapper wrapper = new AircraftTypeWrapper();
+        wrapper.setId(id);
+        wrapper.setName(name);
+        aircraftType = wrapper;
     }
 
     @NotNull

@@ -23,7 +23,7 @@
         </div>
     </nav>
     <form id="aircraft-form" class="form-horizontal" method="POST" th:action="@{/admin/aircraft}">
-        <div th:replace="fragments/card/aircraft :: aircraftFields"></div>
+        <div th:replace="fragments/card/aircraft :: aircraftFields('admin/aircraft/add')"></div>
     </form>
 </div>
 
